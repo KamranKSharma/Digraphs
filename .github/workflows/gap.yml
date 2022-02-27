@@ -86,7 +86,7 @@ jobs:
 
   test-cygwin:
     name: "cygwin / GAP master"
-    runs-on: windows-latest
+    runs-on: windows-2019
     if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) }}
     env:
       CHERE_INVOKING: 1
@@ -102,3 +102,5 @@ jobs:
           curl --retry 5 -L -O "https://digraphs.github.io/Digraphs/${{ env.DIGRAPHS_LIB }}.tar.gz"
           tar xf "${{ env.DIGRAPHS_LIB }}.tar.gz"
       - uses: gap-actions/run-pkg-tests@cygwin-v2
+      - uses: gap-actions/process-coverage@cygwin-v2
+      - uses: codecov/codecov-action@v2
